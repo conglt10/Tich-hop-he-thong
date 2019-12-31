@@ -14,15 +14,6 @@ jobs:
       - run:
           name: Install npm
           command: cd server && npm install
-      - run: mkdir reports
-      - run:
-          name: npm test
-          command: cd server && ./node_modules/.bin/nyc ./node_modules/.bin/mocha --recursive --timeout=5000 --exit
-          when: always
-      - run:
-          name: code-coverage
-          command: cd server && ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
-          when: always
       - store_test_results:
           path: reports
       - store_artifacts:
