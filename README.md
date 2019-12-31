@@ -1,62 +1,25 @@
-# 1. Giới thiệu
+# Các bước triển khai tích hợp
 
-    Project gồm 3 thành phần chính:
+## Bước 1: Clone source code tại đường dẫn [Github](https://github.com/conglt10/Tich-hop-he-thong)
 
-- certificate-network: Chứa cấu hình của mạng, chaincode,...
-- academy-app: ứng dụng phía Academy Org
-- student-app: ứng dụng phía Student Org
+## Bước 2: Tạo một repo mới với tài khoản github cá nhân
 
-# 2. Chạy project
+## Bước 3: Copy source code clone ở bước một và push lên repo ở bước 2
 
-## Setup network và cài đặt chaicode
+## Bước 4: Đăng nhập [CircleCI](https://circleci.com/) với tài khoản github cá nhân
 
-### Pull Docker Image
+## Bước 5: Liên kết CircleCI với repo github cá nhân vừa tạo
 
-```bash
-curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.4 1.4.4 0.4.18
-```
+## Bước 6: Thêm biến môi trường cho project trên circleCI
 
-```bash
-cd network
-```
+![](https://i.ibb.co/FDRY4m7/Screenshot-from-2019-12-31-14-15-47.png)
 
-Làm theo hướng dẫn trong README.md trong folder network
+## Bước 7: Đăng ký tài khoản mới tại [Chatwork](chatwork.com) và [Slack](https://slack.com/) hoặc dùng tài khoản sẵn có
 
-## Phía Client
+## Bước 8: Lấy API key của tài khoản chatwork
 
-```bash
-cd client
-npm install
-npm run dev
-```
+![](https://i.ibb.co/sKh6CsC/Screenshot-from-2019-12-31-14-09-33.png)
 
-## Phía Server
+![](https://i.ibb.co/Gxv0HF9/Screenshot-from-2019-12-31-14-13-09.png)
 
-```bash
-cd server
-npm install
-npm start
-```
-
-# 3. Chú ý
-
-Ở thời điểm khởi tạo chaincode, vẫn chưa có gì được lưu trong chaincode.
-
-Phía Academy có các quyền:
-
-- Register giảng viên mới
-- CreateSubject, chỉ có admin mới có quyền này
-- CreateScore, nếu một student và một subject đã tồn tại trong ledger
-- CreateCertificate: nếu một student đã hoàn thành tất cả các subject thì mới có thể cấp certificate
-- QuerySubject, Student, Score, Certificate
-- GetAllSubjects, Students, Scores, Certificates
-
-Phía Student có các quyền:
-
-- Register student mới
-- QueryStudent, Score, Certificate của chính mình
-- GetAllSubjects
-
-(Các câu lệnh xem thêm trong README.md của từng thư mục)
-
-Xem các structure trong certificate-network/database/academy/go/certificate.go để hiểu rõ hơn.
+## Bước 9: Lấy API key của tài khoản Slack

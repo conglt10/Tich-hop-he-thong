@@ -3,31 +3,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const mongoose = require('mongoose');
 const helmet = require('helmet');
-const checkJWT = require('./middlewares/check-jwt');
 
 const app = express();
 
 require('dotenv').config();
-
-const authRoutes = require('./routes/auth');
-const teacherRoutes = require('./routes/teacher');
-const subjectRoutes = require('./routes/subject');
-const certificateRoutes = require('./routes/certificate');
-const studentRoutes = require('./routes/student');
-const scoreRoutes = require('./routes/score');
-const meRoutes = require('./routes/me');
-
-// Connect database
-mongoose.connect(
-  process.env.MONGODB_URI,
-  { useUnifiedTopology: true, useNewUrlParser: true },
-  (error) => {
-    if (error) console.log(error);
-  }
-);
-mongoose.set('useCreateIndex', true);
 
 // security with helmet
 app.use(helmet());
@@ -47,15 +27,6 @@ app.use(
     credentials: true // allow session cookie from browser to pass through
   })
 );
-
-// Set up routes
-app.use('/auth', authRoutes);
-app.use('/account/student', checkJWT, studentRoutes);
-app.use('/account/teacher', checkJWT, teacherRoutes);
-app.use('/subject', checkJWT, subjectRoutes);
-app.use('/score', checkJWT, scoreRoutes);
-app.use('/certificate', certificateRoutes);
-app.use('/account/me', checkJWT, meRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
